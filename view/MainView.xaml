@@ -18,25 +18,62 @@
         <Grid Grid.Row="0" Grid.Column="0">
 
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="0" Background="WhiteSmoke">
-            <Border BorderBrush="Black" BorderThickness="1"  Margin="100,50,100,50">
-                <ListBox>
 
-                    <!--Templateがよくわからん-->
-                    <!--ItemPanelは，アイテムを並べるためのパネル外枠-->
+        <Grid Grid.Row="1" Grid.Column="0" Background="WhiteSmoke">
+
+            <Grid.Resources>
+                <XmlDataProvider x:Key="comics">
+                    <x:XData>
+                        <comics xmlns="">
+                            <item date="2007/5/2">エム×ゼロ 3</item>
+                            <item date="2007/5/2">銀魂 18</item>
+                            <item date="2007/5/8">無敵看板娘Ｎ 4</item>
+                            <item date="2007/5/17">×××HOLIC 11</item>
+                            <item date="2007/5/18">絶対可憐チルドレン 9</item>
+                        </comics>
+                    </x:XData>
+                </XmlDataProvider>
+            </Grid.Resources>
+            
+
+            <Border  Background="White" BorderBrush="Black" BorderThickness="1"  Margin="100,50,100,50">
+
+                <!--ItemsSource="{Binding Source={StaticResource comics}, XPath=/comics/item}"-->
+
+                <ListBox >
+
+
+
+                    <!--Templateがよくわからん.要は，ListBox自体のスタイルじゃね？-->
+                    <!--ItemPanelは，アイテムを並べるためのパネル指定．アイテムの並べ方法が指定できる．-->
                     <!--ItemContainerStyleは，各アイテムを並べるために用意されてる Style を指定-->
                     <!--ItemTemplateは，各アイテムを表現するテンプレートを指定．ItemTemplateのなかにもItemControlが置ける？-->
+                    <!--外枠のデザインの設定-->
                     <ListBox.Template>
                         <ControlTemplate TargetType="{x:Type ListBox}">
                             <Border>
                                 <ItemsPresenter />
+                                <!--一番上のListBoxはControlクラス．このControlクラスは必ず，Templateという名前のプロパティを持っている． Templateプロパティを設定して，表示方法を変更する．
+                                ListBoxに含まれる，Contentは普段見えない．そのため， ItemPresenterで見えるようにする．ListBox や ComboBoxはItemsControl.
+                                ContentPresenter の代わりに ItemsPresenter を使わないといけない.
+                                
+                                見た目の変更-->
+                                <!--itempresenterがないと，中身が表示されない-->
                             </Border>
                         </ControlTemplate>
-                    </ListBox.Template>                    <ListBox.ItemsPanel>
+                    </ListBox.Template>
+                    <ListBox.ItemsPanel>
+                        <!--中身そのものの表示方法：配置方法？スタイルは関係ない？を変えたい場合に，ItemsPanelプロパティを設定する．つまり，buttonのような外枠だけのものなら，contentspresenterで完結するが，itemspresenterなら，itemspanelで中身そのものの表示が変わる．-->
+                        <!--中身そのものの並べ方,表示方法？アイテムを並べるための，パネルの型を指定する--> 
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Horizontal" />
                         </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>                    <ListBox.ItemTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBoxItem>1</ListBoxItem>
+                    <ListBoxItem>2</ListBoxItem>
+                    <ListBoxItem>3</ListBoxItem>
+                    <!--<ListBox.ItemTemplate>
+                        --><!--データバインディングの設定，DataTemplateがデータバインディングには必要--><!--
                         <DataTemplate>
                             <StackPanel>
                                 <TextBlock>
@@ -50,7 +87,24 @@
                                 <TextBlock Text="{Binding IsAuthenticated}" />
                             </StackPanel>
                         </DataTemplate>
-                    </ListBox.ItemTemplate>
+                    </ListBox.ItemTemplate>-->
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="氏名:{0} ({1})">
+                                            <Binding Path="FullName" />
+                                            <Binding Path="Age" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                                <TextBlock Text="{Binding IsAuthenticated}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+
+
                 </ListBox>
             </Border>
         </Grid>
