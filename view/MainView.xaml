@@ -34,9 +34,9 @@
                     </x:XData>
                 </XmlDataProvider>
             </Grid.Resources>
-            
 
-            <Border  Background="White" BorderBrush="Black" BorderThickness="1"  Margin="100,50,100,50">
+
+            <Border  Background="White" BorderBrush="Black" BorderThickness="1" Margin="100,50,100,50">
 
                 <!--ItemsSource="{Binding Source={StaticResource comics}, XPath=/comics/item}"-->
 
@@ -51,7 +51,7 @@
                     <!--外枠のデザインの設定-->
                     <ListBox.Template>
                         <ControlTemplate TargetType="{x:Type ListBox}">
-                            <Border>
+                            <Border >
                                 <ItemsPresenter />
                                 <!--一番上のListBoxはControlクラス．このControlクラスは必ず，Templateという名前のプロパティを持っている． Templateプロパティを設定して，表示方法を変更する．
                                 ListBoxに含まれる，Contentは普段見えない．そのため， ItemPresenterで見えるようにする．ListBox や ComboBoxはItemsControl.
