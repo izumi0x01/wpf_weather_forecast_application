@@ -40,31 +40,58 @@
 
                 <!--ItemsSource="{Binding Source={StaticResource comics}, XPath=/comics/item}"-->
 
-                <ListBox >
+                <DataGrid  AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding _Info}">
+                    <!--<DataGrid.Template>
+                        <ControlTemplate TargetType="{x:Type DataGrid}">
+                        <Border BorderThickness="1"
+                            BorderBrush="Black"
+                            Background="Azure">
+                        </Border>
+                            <ItemsPresenter Margin="10" />
+                        </ControlTemplate>
+                    </DataGrid.Template>-->
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="商品名"/>
+                        <DataGridTextColumn Header="金額" />
+                    </DataGrid.Columns>
+                    <DataGrid.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            
+                        </ItemsPanelTemplate>
+                    </DataGrid.ItemsPanel>
+                    <DataGrid.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Temperature}"/>
+                            <!--<TextBlock Text="{Binding IsAuthenticated}" />-->
+                        </DataTemplate>
+                    </DataGrid.ItemTemplate>
+                </DataGrid>
+                
+                <!--<ListBox >
 
 
 
-                    <!--Templateがよくわからん.要は，ListBox自体のスタイルじゃね？-->
+                    --><!--Templateがよくわからん.要は，ListBox自体のスタイルじゃね？-->
                     <!--ItemPanelは，アイテムを並べるためのパネル指定．アイテムの並べ方法が指定できる．-->
                     <!--ItemContainerStyleは，各アイテムを並べるために用意されてる Style を指定-->
                     <!--ItemTemplateは，各アイテムを表現するテンプレートを指定．ItemTemplateのなかにもItemControlが置ける？-->
-                    <!--外枠のデザインの設定-->
+                    <!--外枠のデザインの設定--><!--
                     <ListBox.Template>
                         <ControlTemplate TargetType="{x:Type ListBox}">
                             <Border >
                                 <ItemsPresenter />
-                                <!--一番上のListBoxはControlクラス．このControlクラスは必ず，Templateという名前のプロパティを持っている． Templateプロパティを設定して，表示方法を変更する．
+                                --><!--一番上のListBoxはControlクラス．このControlクラスは必ず，Templateという名前のプロパティを持っている． Templateプロパティを設定して，表示方法を変更する．
                                 ListBoxに含まれる，Contentは普段見えない．そのため， ItemPresenterで見えるようにする．ListBox や ComboBoxはItemsControl.
                                 ContentPresenter の代わりに ItemsPresenter を使わないといけない.
                                 
                                 見た目の変更-->
-                                <!--itempresenterがないと，中身が表示されない-->
+                                <!--itempresenterがないと，中身が表示されない--><!--
                             </Border>
                         </ControlTemplate>
                     </ListBox.Template>
                     <ListBox.ItemsPanel>
-                        <!--中身そのものの表示方法：配置方法？スタイルは関係ない？を変えたい場合に，ItemsPanelプロパティを設定する．つまり，buttonのような外枠だけのものなら，contentspresenterで完結するが，itemspresenterなら，itemspanelで中身そのものの表示が変わる．-->
-                        <!--中身そのものの並べ方,表示方法？アイテムを並べるための，パネルの型を指定する--> 
+                        --><!--中身そのものの表示方法：配置方法？スタイルは関係ない？を変えたい場合に，ItemsPanelプロパティを設定する．つまり，buttonのような外枠だけのものなら，contentspresenterで完結するが，itemspresenterなら，itemspanelで中身そのものの表示が変わる．-->
+                        <!--中身そのものの並べ方,表示方法？アイテムを並べるための，パネルの型を指定する--><!-- 
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Horizontal" />
                         </ItemsPanelTemplate>
@@ -72,7 +99,7 @@
                     <ListBoxItem>1</ListBoxItem>
                     <ListBoxItem>2</ListBoxItem>
                     <ListBoxItem>3</ListBoxItem>
-                    <!--<ListBox.ItemTemplate>
+                    --><!--<ListBox.ItemTemplate>
                         --><!--データバインディングの設定，DataTemplateがデータバインディングには必要--><!--
                         <DataTemplate>
                             <StackPanel>
@@ -87,7 +114,7 @@
                                 <TextBlock Text="{Binding IsAuthenticated}" />
                             </StackPanel>
                         </DataTemplate>
-                    </ListBox.ItemTemplate>-->
+                    </ListBox.ItemTemplate>--><!--
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -102,10 +129,12 @@
                                 <TextBlock Text="{Binding IsAuthenticated}" />
                             </StackPanel>
                         </DataTemplate>
-                    </ListBox.ItemTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemContainerStyle>                        <Style TargetType="{x:Type ListBoxItem}">                                                    </Style>                    </ListBox.ItemContainerStyle>
 
 
-                </ListBox>
+
+                </ListBox>-->
             </Border>
         </Grid>
 

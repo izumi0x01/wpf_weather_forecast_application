@@ -9,6 +9,17 @@ namespace wpf_weather_forecast_application.viewmodel
 {
     internal class MainViewModel
     {
+        public List<Info> _Info;
+        public MainViewModel()
+        {
+            this._Info = new List<Info>
+            {
+                new Info{Temperature=24.5f, Date="2/21"},
+                new Info{Temperature=25.5f, Date="2/22"},
+                new Info{Temperature=26.5f, Date="2/23"},
+            };
+        }
+
 
 //        65 行目で新たに SetProperty() メソッドを追加し、プロパティ値変更にはこのメソッドを使用するようにしています。
 //SetProperty() メソッドでは、値が異なっているか、異なっている場合値を更新し、RaiseProeprtyChanged() メソッド

@@ -14,11 +14,15 @@ namespace wpf_weather_forecast_application.model
         snow
     }
 
-    internal class Data
+    internal class Info
     {
-        public string Location{ get; set; }
+        //public string Location{ get; set; }
 
         public float Temperature { get; set; }
+
+        public Weather Weather { get; set; }
+
+        public string Date { get; set; }
 
 
     }
