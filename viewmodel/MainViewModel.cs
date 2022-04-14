@@ -9,7 +9,42 @@ namespace wpf_weather_forecast_application.viewmodel
 {
     internal class MainViewModel
     {
-        public List<Info> _Info;
+        //private string _upperString;
+        ///// <summary>
+        ///// すべて大文字に変換した文字列を取得します。
+        ///// </summary>
+        //public string UpperString
+        //{
+        //    get { return this._upperString; }
+        //    private set
+        //    {
+        //        if (this._upperString != value)
+        //        {
+        //            this._upperString = value;
+        //        }
+        //    }
+        //}
+        //private string _inputString;
+        ///// <summary>
+        ///// 入力文字列を取得または設定します。
+        ///// </summary>
+        //public string InputString
+        //{
+        //    get { return this._inputString; }
+        //    set
+        //    {
+        //        if (this._inputString != value)
+        //        {
+        //            this._inputString = value;
+        //            // 入力された文字列を大文字に変換します
+        //            this.UpperString = this._inputString.ToUpper();
+        //            // 出力ウィンドウに結果を表示します
+        //            System.Diagnostics.Debug.WriteLine("UpperString=" + this.UpperString);
+        //        }
+        //    }
+        //}
+
+        public List<Info> _Info { get; set; }
         public MainViewModel()
         {
             this._Info = new List<Info>
