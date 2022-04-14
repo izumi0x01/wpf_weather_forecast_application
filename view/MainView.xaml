@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpf_weather_forecast_application.view"
         mc:Ignorable="d"
-        Title="MainView" Height="700" Width="1000">
+        Title="MainView"  MinHeight="700">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -26,8 +26,8 @@
             <Rectangle >
                 <Rectangle.Fill>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="Black"/>
-                        <GradientStop Color="White" Offset="1"/>
+                        <!--<GradientStop Color="Black"/>
+                        <GradientStop Color="White" Offset="1"/>-->
                     </LinearGradientBrush>
                 </Rectangle.Fill>
 
@@ -36,7 +36,7 @@
 
         <Grid Grid.Row="1" Grid.Column="0" Background="WhiteSmoke">
 
-            <Grid.Resources>
+            <!--<Grid.Resources>
                 <XmlDataProvider x:Key="comics">
                     <x:XData>
                         <comics xmlns="">
@@ -48,16 +48,16 @@
                         </comics>
                     </x:XData>
                 </XmlDataProvider>
-            </Grid.Resources>
+            </Grid.Resources>-->
 
 
-            <Border  Background="White" BorderBrush="Black" BorderThickness="1" Margin="100,50,100,50">
+            <!--<Border  Background="White" BorderBrush="Black" BorderThickness="1" Margin="100,50,100,50" Width="Auto">-->
 
                 <!--ItemsSource="{Binding Source={StaticResource comics}, XPath=/comics/item}"-->
 
 
 
-                <ListBox ItemsSource="{Binding _Info}" >
+            <ListBox HorizontalAlignment="Left" ItemsSource="{Binding _Info}" Width="Auto" MaxWidth="600"  Margin="50,50,400,50">
 
 
 
@@ -68,7 +68,7 @@
                     外枠のデザインの設定-->
                     <ListBox.Template>
                         <ControlTemplate TargetType="{x:Type ListBox}">
-                            <Border >
+                        <Border  Background="White" BorderBrush="Black" BorderThickness="1">
                                 <ItemsPresenter />
                                 <!--一番上のListBoxはControlクラス．このControlクラスは必ず，Templateという名前のプロパティを持っている． Templateプロパティを設定して，表示方法を変更する．
                                 ListBoxに含まれる，Contentは普段見えない．そのため， ItemPresenterで見えるようにする．ListBox や ComboBoxはItemsControl.
@@ -89,16 +89,52 @@
                     <ListBox.ItemTemplate>
                         <!--データバインディングの設定，DataTemplateがデータバインディングには必要-->
                         <DataTemplate>
-                            <StackPanel>
-                                <Grid Height="60" HorizontalAlignment="Stretch">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="180"/>
-                                        <ColumnDefinition Width="180"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Text="{Binding Date}" />
-                                    <TextBlock Grid.Column="1" Text="{Binding Date}" />
-                                </Grid>
-                            </StackPanel>
+                            <Border BorderBrush="#FFFFC1D5" BorderThickness="1" >
+                                <StackPanel Width="600">
+                                    <StackPanel.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        </LinearGradientBrush>
+                                    </StackPanel.Background>
+                                    <Grid  ShowGridLines="True">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition  Width="2*"/>
+                                            <ColumnDefinition  Width="3*"/>
+                                            <ColumnDefinition  Width="3*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Grid.Column="0">
+                                            <Rectangle Fill="#FFD0D0D0" Width="50" Height="50" Margin="10,10,10,10">
+                                                
+                                            </Rectangle>
+                                        </Border>
+                                        <GridSplitter Grid.Column="0" HorizontalAlignment="Right" Width="1" Background="#FFD6E5F5" IsTabStop="False"/>
+                                        <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Stretch">
+                                            <TextBlock  Text="気象状況" />
+                                            <TextBlock  Text="{Binding Weather}" />
+                                        </StackPanel>
+                                        <GridSplitter Grid.Column="1" HorizontalAlignment="Right" Width="1" Background="#FFD6E5F5" IsTabStop="False"/>
+                                        <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="最高気温"  />
+                                            <TextBlock Text="{Binding MaxTemperature}" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="/"></TextBlock>
+                                                <TextBlock Text="/"></TextBlock>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="最低気温" />
+                                            <TextBlock Text="{Binding MinTemperature}" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <GridSplitter Grid.Column="2" HorizontalAlignment="Right" Width="1" Background="#FFD6E5F5" IsTabStop="False"/>
+                                        <StackPanel Grid.Column="3" Orientation="Vertical">
+                                            <TextBlock  Text="降水確率" />
+                                            <TextBlock  Text="{Binding Rainy_percent}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                     <!--<ListBox.ItemTemplate>
@@ -129,7 +165,7 @@
 
 
                 </ListBox>
-            </Border>
+            <!--</Border>-->
         </Grid>
 
         <!--参考サイト：https://ufcpp.net/study/dotnet/wpf_template.html-->

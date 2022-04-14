@@ -49,9 +49,13 @@ namespace wpf_weather_forecast_application.viewmodel
         {
             this._Info = new List<Info>
             {
-                new Info{Temperature=24.5f, Date="2/21"},
-                new Info{Temperature=25.5f, Date="2/22"},
-                new Info{Temperature=26.5f, Date="2/23"},
+                new Info{Temperature=24.5, Weather=Weather.cloud, Date="2/21", MaxTemperature = 26, MinTemperature = 20,Rainy_percent=20},
+                new Info{Temperature=25.5, Weather=Weather.cloud, Date="2/22", MaxTemperature = 28, MinTemperature = 24,Rainy_percent=10},
+                new Info{Temperature=26.5, Weather=Weather.rain, Date="2/23", MaxTemperature = 29, MinTemperature = 21,Rainy_percent=30},
+                new Info{Temperature=24.5, Weather=Weather.cloud, Date="2/21", MaxTemperature = 26, MinTemperature = 20,Rainy_percent=20},
+                new Info{Temperature=25.5, Weather=Weather.cloud, Date="2/22", MaxTemperature = 28, MinTemperature = 24,Rainy_percent=10},
+                new Info{Temperature=25.5, Weather=Weather.cloud, Date="2/22", MaxTemperature = 28, MinTemperature = 24,Rainy_percent=10},
+                new Info{Temperature=25.5, Weather=Weather.cloud, Date="2/22", MaxTemperature = 28, MinTemperature = 24,Rainy_percent=10},
             };
         }
 
