@@ -5,11 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using wpf_weather_forecast_application.model;
 using Reactive.Bindings;
+using Microsoft.Xaml.Behaviors;
+using Reactive.Bindings.Interactivity;
+using System.Reactive.Linq;
+using System.ComponentModel;
 
 namespace wpf_weather_forecast_application.viewmodel
 {
     internal class MainViewModel
     {
+
+        //void cmbItem_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        //{
+        //    //...do your item selection code here...
+        //}
         public ReactiveProperty<string> _Text { get; set; } = new ReactiveProperty<string>();
         //private string _upperString;
         ///// <summary>
@@ -47,6 +56,7 @@ namespace wpf_weather_forecast_application.viewmodel
         //}
 
         public List<Data> _Data { get; set; }
+
         public MainViewModel()
         {
             this._Data = new List<Data>
@@ -63,6 +73,8 @@ namespace wpf_weather_forecast_application.viewmodel
 
 
         private GetJson _getJson;
+
+
 
         private DelegateCommand _clearCommand;
 

@@ -24,4 +24,6 @@ namespace wpf_weather_forecast_application.view
             InitializeComponent();
         }
     }
+
+
 }

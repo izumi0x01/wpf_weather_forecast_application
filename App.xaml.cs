@@ -34,9 +34,7 @@ namespace wpf_weather_forecast_application
             
             w.Show();
 
-            //var t = Task.Delay(10000);
-            //t.ContinueWith((task) => { vm._Text.Value = "待機終了"; });
-            //vm._Text.Value = "メソッド呼び出し終了";
+
         }
     }
 }

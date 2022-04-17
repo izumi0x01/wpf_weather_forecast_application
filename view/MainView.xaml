@@ -2,6 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:behaviours="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:interactivity="clr-namespace:Reactive.Bindings.Interactivity;assembly=ReactiveProperty.WPF"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpf_weather_forecast_application.view"
         mc:Ignorable="d"
@@ -19,21 +21,16 @@
             <!--column = autoにはしてはいけない-->
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.Column="0">
-            <StackPanel>
-                <Button Height="20" Content="condact" Command="{Binding ClearCommand}">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-
-                        </Style>
-                    </Button.Style>
-                </Button>
-                <Button Content="tokyo" Command="" CommandParameter=""/>
-                <Button Content="hukuoka" Command="" CommandParameter=""/>
-                <Button Content="hokkaido" Command="" CommandParameter=""/>
-                <CheckBox></CheckBox>
-                <TextBox Height="20" Text="{Binding Path=_Text.Value}"/>
-                <TextBlock Height="20" Text="{Binding Path=_Text.Value}"/>
-            </StackPanel>
+            <!--<ComboBox x:Name="MyBox"
+        ItemsSource="{Binding MyList}"
+        SelectedValue="{Binding MyItem, Mode=OneWayToSource}" >
+                <ComboBox.ItemContainerStyle>
+                    <Style>
+                        <EventSetter Event="ComboBoxItem.PreviewMouseDown"
+                    Handler="cmbItem_PreviewMouseDown"/>
+                    </Style>
+                </ComboBox.ItemContainerStyle>
+            </ComboBox>-->
             <!--<Rectangle >
                 <Rectangle.Fill>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
