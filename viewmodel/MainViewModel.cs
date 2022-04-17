@@ -46,23 +46,62 @@ namespace wpf_weather_forecast_application.viewmodel
         //    }
         //}
 
-        public List<Info> _Info { get; set; }
+        public List<Data> _Data { get; set; }
         public MainViewModel()
         {
-            this._Info = new List<Info>
+            this._Data = new List<Data>
             {
-                new Info{Temperature=24.5, Weather=Weather.cloud, Date="2/21", MaxTemperature = 26, MinTemperature = 20,Rainy_percent=20},
-                new Info{Temperature=25.5, Weather=Weather.cloud, Date="2/22", MaxTemperature = 28, MinTemperature = 24,Rainy_percent=10},
-                new Info{Temperature=26.5, Weather=Weather.rain, Date="2/23", MaxTemperature = 29, MinTemperature = 21,Rainy_percent=30},
-                new Info{Temperature=24.5, Weather=Weather.cloud, Date="2/21", MaxTemperature = 26, MinTemperature = 20,Rainy_percent=20},
-                new Info{Temperature=25.5, Weather=Weather.cloud, Date="2/22", MaxTemperature = 28, MinTemperature = 24,Rainy_percent=10},
-                new Info{Temperature=25.5, Weather=Weather.cloud, Date="2/22", MaxTemperature = 28, MinTemperature = 24,Rainy_percent=10},
-                new Info{Temperature=25.5, Weather=Weather.cloud, Date="2/22", MaxTemperature = 28, MinTemperature = 24,Rainy_percent=10},
+                new Data{Temperature=24.5, Weather=Weather.cloud, Date="2/21", MaxTemperature = 26, MinTemperature = 20,Rainy_percent=20},
+                new Data{Temperature=25.5, Weather=Weather.cloud, Date="2/22", MaxTemperature = 28, MinTemperature = 24,Rainy_percent=10},
+                new Data{Temperature=26.5, Weather=Weather.rain, Date="2/23", MaxTemperature = 29, MinTemperature = 21,Rainy_percent=30},
+                new Data{Temperature=24.5, Weather=Weather.cloud, Date="2/21", MaxTemperature = 26, MinTemperature = 20,Rainy_percent=20},
+                new Data{Temperature=25.5, Weather=Weather.cloud, Date="2/22", MaxTemperature = 28, MinTemperature = 24,Rainy_percent=10},
+                new Data{Temperature=25.5, Weather=Weather.cloud, Date="2/22", MaxTemperature = 28, MinTemperature = 24,Rainy_percent=10},
+                new Data{Temperature=25.5, Weather=Weather.cloud, Date="2/22", MaxTemperature = 28, MinTemperature = 24,Rainy_percent=10},
             };
         }
 
 
         private GetJson _getJson;
+
+        private DelegateCommand _clearCommand;
+
+        private DelegateCommand _testCommand;
+
+        //public DelegateCommand TestCommand
+        //{
+        //    get
+        //    {
+        //        return this._testCommand ?? (this._testCommand = new DelegateCommand(_ => { OnTest(); }))
+        //    }
+        //    return this._testCommand;
+        //}
+
+        //private void OnTest()
+        //{
+        //    this._data.testdata = s;
+        //}
+        //private Data _data;
+
+        // デリゲートは，使い道がよくわからないからすぐ忘れる．
+        // マルチキャスト機能：一つのデリゲート変数に，複数のデリゲートを登録することができる．→つまり，caluculatorデリゲートは，mulやsubやdivなどの関数を処理に保存できる．
+        //C#の_  は， discardを意味する
+
+        //Actionは引数を持たないといけない．引数あり，返り値なし．
+        //Funcは，引数なし，返り値あり．
+        public DelegateCommand ClearCommand
+        {
+            get
+            {
+                if(this._clearCommand == null)
+                {
+                     //変数名に破棄を指定したものが，_である．変数のメモリを確保した後に，自動的に破棄される．
+                    this._clearCommand = new DelegateCommand(( _) => { _Text.Value = "";  });
+                }
+                return this._clearCommand;
+            }
+
+        }
 
 
 //        65 行目で新たに SetProperty() メソッドを追加し、プロパティ値変更にはこのメソッドを使用するようにしています。

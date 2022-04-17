@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:wpf_weather_forecast_application.view"
         mc:Ignorable="d"
         Title="MainView"  MinHeight="700">
+
+    <!--WPFで提供されているコマンドソースには，コントロールとインプットバインディングの2種類がある．-->
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -17,13 +20,16 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.Column="0">
             <StackPanel>
-                <Button Height="20" Content="condact">
+                <Button Height="20" Content="condact" Command="{Binding ClearCommand}">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
- 
+
                         </Style>
                     </Button.Style>
                 </Button>
+                <Button Content="tokyo" Command="" CommandParameter=""/>
+                <Button Content="hukuoka" Command="" CommandParameter=""/>
+                <Button Content="hokkaido" Command="" CommandParameter=""/>
                 <CheckBox></CheckBox>
                 <TextBox Height="20" Text="{Binding Path=_Text.Value}"/>
                 <TextBlock Height="20" Text="{Binding Path=_Text.Value}"/>
@@ -61,7 +67,7 @@
 
 
 
-            <ListBox HorizontalAlignment="Left" ItemsSource="{Binding _Info}" Width="Auto" MaxWidth="600"  Margin="50,50,400,50">
+            <ListBox HorizontalAlignment="Left" ItemsSource="{Binding _Data}" Width="Auto" MaxWidth="600"  Margin="50,50,400,50">
 
 
 

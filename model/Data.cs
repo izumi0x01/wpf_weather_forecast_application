@@ -13,8 +13,14 @@ namespace wpf_weather_forecast_application.model
         rain,
         snow
     }
+    public enum Location
+    {
+        tokyo = 0,
+        hokkaido  = 1,
+        hukuoka = 2,
+    }
 
-    internal class Info
+    internal class Data
     {
         //public string Location{ get; set; }
 
@@ -29,6 +35,6 @@ namespace wpf_weather_forecast_application.model
 
         public double MinTemperature { get; set; }
 
-
+        public string testdata { get; set; }
     }
 }
