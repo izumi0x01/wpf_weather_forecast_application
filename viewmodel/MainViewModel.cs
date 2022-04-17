@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using wpf_weather_forecast_application.model;
+using Reactive.Bindings;
 
 namespace wpf_weather_forecast_application.viewmodel
 {
     internal class MainViewModel
     {
+        public ReactiveProperty<string> _Text { get; set; } = new ReactiveProperty<string>();
         //private string _upperString;
         ///// <summary>
         ///// すべて大文字に変換した文字列を取得します。
@@ -58,6 +60,9 @@ namespace wpf_weather_forecast_application.viewmodel
                 new Info{Temperature=25.5, Weather=Weather.cloud, Date="2/22", MaxTemperature = 28, MinTemperature = 24,Rainy_percent=10},
             };
         }
+
+
+        private GetJson _getJson;
 
 
 //        65 行目で新たに SetProperty() メソッドを追加し、プロパティ値変更にはこのメソッドを使用するようにしています。

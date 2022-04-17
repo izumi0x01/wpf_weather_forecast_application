@@ -16,22 +16,26 @@
             <!--column = autoにはしてはいけない-->
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.Column="0">
-            <Button>
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
+            <StackPanel>
+                <Button Height="20" Content="condact">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
  
-                    </Style>
-                </Button.Style>
-            </Button>
-            <Rectangle >
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <CheckBox></CheckBox>
+                <TextBox Height="20" Text="{Binding Path=_Text.Value}"/>
+                <TextBlock Height="20" Text="{Binding Path=_Text.Value}"/>
+            </StackPanel>
+            <!--<Rectangle >
                 <Rectangle.Fill>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <!--<GradientStop Color="Black"/>
-                        <GradientStop Color="White" Offset="1"/>-->
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="White" Offset="1"/>
                     </LinearGradientBrush>
                 </Rectangle.Fill>
-
-            </Rectangle>
+            </Rectangle>-->
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="0" Background="WhiteSmoke">

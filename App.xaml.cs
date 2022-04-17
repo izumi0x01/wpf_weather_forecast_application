@@ -22,6 +22,7 @@ namespace wpf_weather_forecast_application
             var w = new MainView();
             var vm = new MainViewModel();
 
+
             w.DataContext = vm;
             w.Show();
         }
