@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using wpf_weather_forecast_application.model;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Reactive.Bindings;
 using Microsoft.Xaml.Behaviors;
 using Reactive.Bindings.Interactivity;
@@ -57,11 +59,18 @@ namespace wpf_weather_forecast_application.viewmodel
 
         private Weather _Weather;
 
+        public ObservableCollection<WeatherModel> One_day_Weather { get; } = new ObservableCollection<WeatherModel>();
+
         public List<WeatherModel> One_Week_Weather;
-        public List<WeatherModel> One_day_Weather;
+
+        //プロパティを持たないと，VMに反映されない．なぜだぁ
+        //public List<WeatherModel> One_day_Weather { get; set; }
         public MainViewModel()
         {
             this._Weather = new Weather();
+            //this.One_day_Weather = new List<WeatherModel>(){
+            //    new WeatherModel() { Temperature=24.5, Condition=Condition.cloud, Date="2/21", MaxTemperature = 26, MinTemperature = 20,Rainy_percent=20,area = "huga" }
+            //};
         }
         
         private DelegateCommand _GetDataCommand;
@@ -80,9 +89,13 @@ namespace wpf_weather_forecast_application.viewmodel
 
         private void GetData()
         {
-            this._Weather.GetJsonData();
+            //this._Weather.GetJsonData();
             //this.One_day_Weather = this._Weather.One_week_weather.ToList();
-            this.One_day_Weather = new List<WeatherModel>(){ new WeatherModel() { area = "huga" } };
+            //this.One_day_Weather = new List<WeatherModel>(){
+            //    new WeatherModel() { Temperature=24.5, Condition=Condition.cloud, Date="2/21", MaxTemperature = 26, MinTemperature = 20,Rainy_percent=20,area = "huga" } 
+            //};
+            One_day_Weather.Add(new WeatherModel() { Temperature = 24.5, Condition = Condition.cloud, Date = "2/21", MaxTemperature = 26, MinTemperature = 20, Rainy_percent = 20, area = "huga" });
+
         }
 
         public void Execute()

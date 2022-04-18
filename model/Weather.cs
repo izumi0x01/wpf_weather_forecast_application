@@ -1,14 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using System.Net.Http;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
 using System.Net;
-using System.Text.Json;
 
 namespace wpf_weather_forecast_application.model
 {
@@ -22,7 +16,7 @@ namespace wpf_weather_forecast_application.model
     public enum Location
     {
         tokyo = 0,
-        hokkaido  = 1,
+        hokkaido = 1,
         hukuoka = 2,
     }
 
@@ -40,14 +34,14 @@ namespace wpf_weather_forecast_application.model
 
         private WeatherModel one_day_weather;
 
-        public WeatherModel One_day_weather
-        {
-            get
-            {
-                return one_day_weather;
-            }
-             
-        }
+        public WeatherModel One_day_weather { get; set; }
+        //{
+        //    get
+        //    {
+        //        return one_day_weather;
+        //    }
+
+        //}
 
         public string tempdata { get; set; }
 
@@ -93,7 +87,7 @@ namespace wpf_weather_forecast_application.model
 
     internal class WeatherModel
     {
-        
+
         //public string Location{ get; set; }
 
         public double Temperature { get; set; }
@@ -107,7 +101,7 @@ namespace wpf_weather_forecast_application.model
 
         public double MinTemperature { get; set; }
 
-        public string datetime { get; set; } 
+        public string datetime { get; set; }
         public string area { get; set; }
 
     }

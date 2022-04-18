@@ -38,6 +38,9 @@
                     </LinearGradientBrush>
                 </Rectangle.Fill>
             </Rectangle>-->
+            <Button Command="{Binding GetDataCommand}" Content="getdata">
+                
+            </Button>
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="0" Background="WhiteSmoke">
@@ -75,8 +78,8 @@
                     外枠のデザインの設定-->
                     <ListBox.Template>
                         <ControlTemplate TargetType="{x:Type ListBox}">
-                        <Border  Background="White" BorderBrush="Black" BorderThickness="1">
-                                <ItemsPresenter />
+                        <Border  Background="White" BorderBrush="Black" BorderThickness="1" >
+                                <ItemsPresenter Width="600"/>
                                 <!--一番上のListBoxはControlクラス．このControlクラスは必ず，Templateという名前のプロパティを持っている． Templateプロパティを設定して，表示方法を変更する．
                                 ListBoxに含まれる，Contentは普段見えない．そのため， ItemPresenterで見えるようにする．ListBox や ComboBoxはItemsControl.
                                 ContentPresenter の代わりに ItemsPresenter を使わないといけない.
@@ -97,16 +100,16 @@
                         <!--データバインディングの設定，DataTemplateがデータバインディングには必要-->
                         <DataTemplate>
                             <Border BorderBrush="#FFFFC1D5" BorderThickness="1" >
-                                <behaviours:Interaction.Triggers>
+                                <!--<behaviours:Interaction.Triggers>
                                     <behaviours:EventTrigger EventName="MouseDoubleClick">
-                                        <!-- RelativeSourceで何処まで遡るかで任意のVMのメソッドが呼べる。
+                                        --><!-- RelativeSourceで何処まで遡るかで任意のVMのメソッドが呼べる。
                                      ListBoxItemまでならPersonオブジェクト。ListBoxまで遡るとMainWindowViewModel。
-                                   　あと、コマンド作るのがだるかったのでCallMethodActionでちょっと手抜き -->
+                                   　あと、コマンド作るのがだるかったのでCallMethodActionでちょっと手抜き --><!--
                                         <behaviours:CallMethodAction 
                                     TargetObject="{Binding Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=DataContext}" 
                                     MethodName="Execute"/>
                                     </behaviours:EventTrigger>
-                                </behaviours:Interaction.Triggers>
+                                </behaviours:Interaction.Triggers>-->
                             <StackPanel Width="600">
                                     <StackPanel.Background>
                                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
