@@ -55,45 +55,47 @@ namespace wpf_weather_forecast_application.viewmodel
         //    }
         //}
 
-        public List<Data> _Data { get; set; }
+        private Weather _Weather;
 
+        public List<WeatherModel> One_Week_Weather;
+        public List<WeatherModel> One_day_Weather;
         public MainViewModel()
         {
-            this._Data = new List<Data>
+            this._Weather = new Weather();
+        }
+        
+        private DelegateCommand _GetDataCommand;
+
+        public DelegateCommand GetDataCommand
+        {
+            get
             {
-                new Data{Temperature=24.5, Weather=Weather.cloud, Date="2/21", MaxTemperature = 26, MinTemperature = 20,Rainy_percent=20},
-                new Data{Temperature=25.5, Weather=Weather.cloud, Date="2/22", MaxTemperature = 28, MinTemperature = 24,Rainy_percent=10},
-                new Data{Temperature=26.5, Weather=Weather.rain, Date="2/23", MaxTemperature = 29, MinTemperature = 21,Rainy_percent=30},
-                new Data{Temperature=24.5, Weather=Weather.cloud, Date="2/21", MaxTemperature = 26, MinTemperature = 20,Rainy_percent=20},
-                new Data{Temperature=25.5, Weather=Weather.cloud, Date="2/22", MaxTemperature = 28, MinTemperature = 24,Rainy_percent=10},
-                new Data{Temperature=25.5, Weather=Weather.cloud, Date="2/22", MaxTemperature = 28, MinTemperature = 24,Rainy_percent=10},
-                new Data{Temperature=25.5, Weather=Weather.cloud, Date="2/22", MaxTemperature = 28, MinTemperature = 24,Rainy_percent=10},
-            };
+                return this._GetDataCommand ?? (this._GetDataCommand = new DelegateCommand(_ =>
+                {
+                    GetData();
+                }));
+            }
+
+        }
+
+        private void GetData()
+        {
+            this._Weather.GetJsonData();
+            //this.One_day_Weather = this._Weather.One_week_weather.ToList();
+            this.One_day_Weather = new List<WeatherModel>(){ new WeatherModel() { area = "huga" } };
+        }
+
+        public void Execute()
+        {
+            // とりあえず呼ばれたことがわかるようにVMでメッセージボックス出してます。
+            // 本当は、VMでこんなことしたらダメよ！
+
+            System.Windows.MessageBox.Show("hoge");
+                return;
+
         }
 
 
-        private GetJson _getJson;
-
-
-
-        private DelegateCommand _clearCommand;
-
-        private DelegateCommand _testCommand;
-
-        //public DelegateCommand TestCommand
-        //{
-        //    get
-        //    {
-        //        return this._testCommand ?? (this._testCommand = new DelegateCommand(_ => { OnTest(); }))
-        //    }
-        //    return this._testCommand;
-        //}
-
-        //private void OnTest()
-        //{
-        //    this._data.testdata = s;
-        //}
-        //private Data _data;
 
         // デリゲートは，使い道がよくわからないからすぐ忘れる．
         // マルチキャスト機能：一つのデリゲート変数に，複数のデリゲートを登録することができる．→つまり，caluculatorデリゲートは，mulやsubやdivなどの関数を処理に保存できる．
@@ -101,19 +103,6 @@ namespace wpf_weather_forecast_application.viewmodel
 
         //Actionは引数を持たないといけない．引数あり，返り値なし．
         //Funcは，引数なし，返り値あり．
-        public DelegateCommand ClearCommand
-        {
-            get
-            {
-                if(this._clearCommand == null)
-                {
-                     //変数名に破棄を指定したものが，_である．変数のメモリを確保した後に，自動的に破棄される．
-                    this._clearCommand = new DelegateCommand(( _) => { _Text.Value = "";  });
-                }
-                return this._clearCommand;
-            }
-
-        }
 
 
 //        65 行目で新たに SetProperty() メソッドを追加し、プロパティ値変更にはこのメソッドを使用するようにしています。
@@ -126,14 +115,5 @@ namespace wpf_weather_forecast_application.viewmodel
 //も使うことができます。さらに、RaisePropertyChanged() メソッドと同じく CallerMemberName 属性を使用しているた
 //め、プロパティ名を明示的に書かなくてもプロパティ値更新を正常におこなえます。
 
-        //public MainViewModel()
-        //{
-        //    this.locate = new Data();
-        //}
-
-        //public List<Data> locate
-        //{
-
-        //}
     }
 }

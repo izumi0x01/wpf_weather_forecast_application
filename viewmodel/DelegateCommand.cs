@@ -59,6 +59,7 @@ namespace wpf_weather_forecast_application.viewmodel
         /// </summary>
         /// <param name="parameter">判別処理に対するパラメータを指定します。</param>
         /// <returns>実行可能な場合に true を返します。</returns>
+        /// 
         public bool CanExecute(object parameter)
         {
             return (this._canExecute != null) ? this._canExecute(parameter) : true;

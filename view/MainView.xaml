@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:behaviours="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:interactivity="clr-namespace:Reactive.Bindings.Interactivity;assembly=ReactiveProperty.WPF"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpf_weather_forecast_application.view"
         mc:Ignorable="d"
@@ -64,10 +63,11 @@
 
 
 
-            <ListBox HorizontalAlignment="Left" ItemsSource="{Binding _Data}" Width="Auto" MaxWidth="600"  Margin="50,50,400,50">
+            <ListBox HorizontalAlignment="Left" ItemsSource="{Binding One_day_Weather}" Width="Auto" MaxWidth="600"  Margin="50,50,400,50">
 
 
-
+                    <!--realtivepropertyは，現在の値を取得する-->
+                
                     <!--Templateがよくわからん.要は，ListBox自体のスタイルじゃね？
                     ItemPanelは，アイテムを並べるためのパネル指定．アイテムの並べ方法が指定できる．
                     ItemContainerStyleは，各アイテムを並べるために用意されてる Style を指定
@@ -97,7 +97,17 @@
                         <!--データバインディングの設定，DataTemplateがデータバインディングには必要-->
                         <DataTemplate>
                             <Border BorderBrush="#FFFFC1D5" BorderThickness="1" >
-                                <StackPanel Width="600">
+                                <behaviours:Interaction.Triggers>
+                                    <behaviours:EventTrigger EventName="MouseDoubleClick">
+                                        <!-- RelativeSourceで何処まで遡るかで任意のVMのメソッドが呼べる。
+                                     ListBoxItemまでならPersonオブジェクト。ListBoxまで遡るとMainWindowViewModel。
+                                   　あと、コマンド作るのがだるかったのでCallMethodActionでちょっと手抜き -->
+                                        <behaviours:CallMethodAction 
+                                    TargetObject="{Binding Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=DataContext}" 
+                                    MethodName="Execute"/>
+                                    </behaviours:EventTrigger>
+                                </behaviours:Interaction.Triggers>
+                            <StackPanel Width="600">
                                     <StackPanel.Background>
                                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                         </LinearGradientBrush>
@@ -116,8 +126,8 @@
                                         </Border>
                                         <GridSplitter Grid.Column="0" HorizontalAlignment="Right" Width="1" Background="#FFD6E5F5" IsTabStop="False"/>
                                         <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Stretch">
-                                            <TextBlock  Text="気象状況" />
-                                            <TextBlock  Text="{Binding Weather}" />
+                                            <TextBlock  Text="観測場所" />
+                                        <TextBlock  Text="{Binding area}" />
                                         </StackPanel>
                                         <GridSplitter Grid.Column="1" HorizontalAlignment="Right" Width="1" Background="#FFD6E5F5" IsTabStop="False"/>
                                         <StackPanel Grid.Column="2" Orientation="Horizontal">
