@@ -8,8 +8,6 @@
         mc:Ignorable="d"
         Title="MainView"  MinHeight="700">
 
-    <!--WPFで提供されているコマンドソースには，コントロールとインプットバインディングの2種類がある．-->
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -44,152 +42,97 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="0" Background="WhiteSmoke">
-
-            <!--<Grid.Resources>
-                <XmlDataProvider x:Key="comics">
-                    <x:XData>
-                        <comics xmlns="">
-                            <item date="2007/5/2">エム×ゼロ 3</item>
-                            <item date="2007/5/2">銀魂 18</item>
-                            <item date="2007/5/8">無敵看板娘Ｎ 4</item>
-                            <item date="2007/5/17">×××HOLIC 11</item>
-                            <item date="2007/5/18">絶対可憐チルドレン 9</item>
-                        </comics>
-                    </x:XData>
-                </XmlDataProvider>
-            </Grid.Resources>-->
-
-
-            <!--<Border  Background="White" BorderBrush="Black" BorderThickness="1" Margin="100,50,100,50" Width="Auto">-->
-
-                <!--ItemsSource="{Binding Source={StaticResource comics}, XPath=/comics/item}"-->
-
-
-
             <ListBox HorizontalAlignment="Left" ItemsSource="{Binding One_day_Weather}" Width="Auto" MaxWidth="600"  Margin="50,50,400,50">
 
-
-                    <!--realtivepropertyは，現在の値を取得する-->
-                
-                    <!--Templateがよくわからん.要は，ListBox自体のスタイルじゃね？
-                    ItemPanelは，アイテムを並べるためのパネル指定．アイテムの並べ方法が指定できる．
-                    ItemContainerStyleは，各アイテムを並べるために用意されてる Style を指定
-                    ItemTemplateは，各アイテムを表現するテンプレートを指定．ItemTemplateのなかにもItemControlが置ける？
-                    外枠のデザインの設定-->
-                    <ListBox.Template>
-                        <ControlTemplate TargetType="{x:Type ListBox}">
+                <!--外枠のデザインの設定-->
+                <ListBox.Template>
+                    <ControlTemplate TargetType="{x:Type ListBox}">
                         <Border  Background="White" BorderBrush="Black" BorderThickness="1" >
-                                <ItemsPresenter Width="600"/>
-                                <!--一番上のListBoxはControlクラス．このControlクラスは必ず，Templateという名前のプロパティを持っている． Templateプロパティを設定して，表示方法を変更する．
-                                ListBoxに含まれる，Contentは普段見えない．そのため， ItemPresenterで見えるようにする．ListBox や ComboBoxはItemsControl.
-                                ContentPresenter の代わりに ItemsPresenter を使わないといけない.
-                                
-                                見た目の変更
-                                itempresenterがないと，中身が表示されない-->
-                            </Border>
-                        </ControlTemplate>
-                    </ListBox.Template>
-                    <ListBox.ItemsPanel>
-                        <!--中身そのものの表示方法：配置方法？スタイルは関係ない？を変えたい場合に，ItemsPanelプロパティを設定する．つまり，buttonのような外枠だけのものなら，contentspresenterで完結するが，itemspresenterなら，itemspanelで中身そのものの表示が変わる．-->
-                        <!--中身そのものの並べ方,表示方法？アイテムを並べるための，パネルの型を指定する-->
-                        <ItemsPanelTemplate>
-                            <StackPanel/>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                    <ListBox.ItemTemplate>
-                        <!--データバインディングの設定，DataTemplateがデータバインディングには必要-->
-                        <DataTemplate>
-                            <Border BorderBrush="#FFFFC1D5" BorderThickness="1" >
-                                <!--<behaviours:Interaction.Triggers>
+                            <ItemsPresenter Width="600"/>
+                            <!--中身の要素を表示するには，itempresenterが必要．
+                            itempresenterは要素を表示するために，必要．-->
+                        </Border>
+                    </ControlTemplate>
+                </ListBox.Template>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <!--要素の並べ方．つまり，垂直方向stackpanelか横方向wrappanelか．-->
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <!--データバインディングの設定，DataTemplateがデータバインディングには必要-->
+                    <DataTemplate>
+                        <Border BorderBrush="#FFFFC1D5" BorderThickness="1" >
+                            <!--<behaviours:Interaction.Triggers>
                                     <behaviours:EventTrigger EventName="MouseDoubleClick">
-                                        --><!-- RelativeSourceで何処まで遡るかで任意のVMのメソッドが呼べる。
+                                        -->
+                            <!-- RelativeSourceで何処まで遡るかで任意のVMのメソッドが呼べる。
                                      ListBoxItemまでならPersonオブジェクト。ListBoxまで遡るとMainWindowViewModel。
-                                   　あと、コマンド作るのがだるかったのでCallMethodActionでちょっと手抜き --><!--
+                                   　あと、コマンド作るのがだるかったのでCallMethodActionでちょっと手抜き -->
+                            <!--
                                         <behaviours:CallMethodAction 
                                     TargetObject="{Binding Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=DataContext}" 
                                     MethodName="Execute"/>
                                     </behaviours:EventTrigger>
                                 </behaviours:Interaction.Triggers>-->
                             <StackPanel Width="600">
-                                    <StackPanel.Background>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        </LinearGradientBrush>
-                                    </StackPanel.Background>
-                                    <Grid  ShowGridLines="True">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition  Width="2*"/>
-                                            <ColumnDefinition  Width="3*"/>
-                                            <ColumnDefinition  Width="3*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Border Grid.Column="0">
-                                            <Rectangle Fill="#FFD0D0D0" Width="50" Height="50" Margin="10,10,10,10">
-                                                
-                                            </Rectangle>
-                                        </Border>
-                                        <GridSplitter Grid.Column="0" HorizontalAlignment="Right" Width="1" Background="#FFD6E5F5" IsTabStop="False"/>
-                                        <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Stretch">
-                                            <TextBlock  Text="観測場所" />
+                                <StackPanel.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    </LinearGradientBrush>
+                                </StackPanel.Background>
+                                <Grid  ShowGridLines="True">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition  Width="2*"/>
+                                        <ColumnDefinition  Width="3*"/>
+                                        <ColumnDefinition  Width="3*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0">
+                                        <Rectangle Fill="#FFD0D0D0" Width="50" Height="50" Margin="10,10,10,10">
+
+                                        </Rectangle>
+                                    </Border>
+                                    <GridSplitter Grid.Column="0" HorizontalAlignment="Right" Width="1" Background="#FFD6E5F5" IsTabStop="False"/>
+                                    <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Stretch">
+                                        <TextBlock  Text="観測場所" />
                                         <TextBlock  Text="{Binding area}" />
-                                        </StackPanel>
-                                        <GridSplitter Grid.Column="1" HorizontalAlignment="Right" Width="1" Background="#FFD6E5F5" IsTabStop="False"/>
-                                        <StackPanel Grid.Column="2" Orientation="Horizontal">
-                                            <StackPanel Orientation="Vertical">
-                                                <TextBlock Text="最高気温"  />
+                                    </StackPanel>
+                                    <GridSplitter Grid.Column="1" HorizontalAlignment="Right" Width="1" Background="#FFD6E5F5" IsTabStop="False"/>
+                                    <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text="最高気温"  />
                                             <TextBlock Text="{Binding MaxTemperature}" />
-                                            </StackPanel>
-                                            <StackPanel Orientation="Vertical">
-                                                <TextBlock Text="/"></TextBlock>
-                                                <TextBlock Text="/"></TextBlock>
-                                            </StackPanel>
-                                            <StackPanel Orientation="Vertical">
-                                                <TextBlock Text="最低気温" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text="/"></TextBlock>
+                                            <TextBlock Text="/"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text="最低気温" />
                                             <TextBlock Text="{Binding MinTemperature}" />
-                                            </StackPanel>
                                         </StackPanel>
-                                        <GridSplitter Grid.Column="2" HorizontalAlignment="Right" Width="1" Background="#FFD6E5F5" IsTabStop="False"/>
-                                        <StackPanel Grid.Column="3" Orientation="Vertical">
-                                            <TextBlock  Text="降水確率" />
-                                            <TextBlock  Text="{Binding Rainy_percent}" />
-                                        </StackPanel>
-                                    </Grid>
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                    <!--<ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock>
-                                    <TextBlock.Text>
-                                        <MultiBinding StringFormat="氏名:{0} ({1})">
-                                            <Binding Path="FullName" />
-                                            <Binding Path="Age" />
-                                        </MultiBinding>
-                                    </TextBlock.Text>
-                                </TextBlock>
-                                <TextBlock Text="{Binding IsAuthenticated}" />
+                                    </StackPanel>
+                                    <GridSplitter Grid.Column="2" HorizontalAlignment="Right" Width="1" Background="#FFD6E5F5" IsTabStop="False"/>
+                                    <StackPanel Grid.Column="3" Orientation="Vertical">
+                                        <TextBlock  Text="降水確率" />
+                                        <TextBlock  Text="{Binding Rainy_percent}" />
+                                    </StackPanel>
+                                </Grid>
                             </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>-->
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListBoxItem}">
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
 
-                        </Style>
-                        <!--<Style TargetType="ListBoxItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        </Style>-->
-                    </ListBox.ItemContainerStyle>
+                    </Style>
+                </ListBox.ItemContainerStyle>
 
-
-
-
-                </ListBox>
-            <!--</Border>-->
+            </ListBox>
         </Grid>
 
         <!--参考サイト：https://ufcpp.net/study/dotnet/wpf_template.html-->
-
         <!--必要な要素：日付，気温，湿度，状態，最高最低気温-->
 
     </Grid>
