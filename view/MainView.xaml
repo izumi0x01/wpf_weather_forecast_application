@@ -88,15 +88,16 @@
                                         <ColumnDefinition  Width="3*"/>
                                         <ColumnDefinition  Width="3*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Border Grid.Column="0">
-                                        <Rectangle Fill="#FFD0D0D0" Width="50" Height="50" Margin="10,10,10,10">
-
-                                        </Rectangle>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="68"/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Column="0" Width="70">
+                                        <Image Source="{Binding Image_URI}"/>
                                     </Border>
                                     <GridSplitter Grid.Column="0" HorizontalAlignment="Right" Width="1" Background="#FFD6E5F5" IsTabStop="False"/>
                                     <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Stretch">
-                                        <TextBlock  Text="観測場所" />
-                                        <TextBlock  Text="{Binding area}" />
+                                        <TextBlock  Text="日付" />
+                                        <TextBlock  Text="{Binding Datetime}" />
                                     </StackPanel>
                                     <GridSplitter Grid.Column="1" HorizontalAlignment="Right" Width="1" Background="#FFD6E5F5" IsTabStop="False"/>
                                     <StackPanel Grid.Column="2" Orientation="Horizontal">

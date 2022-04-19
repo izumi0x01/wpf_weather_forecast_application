@@ -13,6 +13,7 @@ using Microsoft.Xaml.Behaviors;
 using Reactive.Bindings.Interactivity;
 using System.Reactive.Linq;
 using System.ComponentModel;
+using System.Windows.Media.Imaging;
 
 
 //ViewModelとはViewをモデル化したものである
@@ -47,7 +48,8 @@ namespace wpf_weather_forecast_application.viewmodel
         public MainViewModel()
         {
             this._Weather = new Weather();
-            this._Weather.GetWeeklyJsonData();
+            this._Weather.GetWeeklyWeatherJsonData();
+            this.DisplayWeeklyWeather();
         }
 
         private DelegateCommand _GetDataCommand;
@@ -59,23 +61,36 @@ namespace wpf_weather_forecast_application.viewmodel
                 return this._GetDataCommand ?? (this._GetDataCommand = new DelegateCommand(_ =>
                 {
                     System.Diagnostics.Debug.WriteLine("except function _Weekly_Weather.Count:" + _Weekly_Weather.Count);
-                    GetData();
+                    ClearWeeklyWeather();
+                    DisplayWeeklyWeather();
                 }));
             }
 
         }
 
-        private void GetData()
+
+        private void DisplayWeeklyWeather()
         {
-            //this._Weekly_Weather = new ObservableCollection<WeatherModel>(this._Weather.Weekly_Weather);
-            System.Diagnostics.Debug.WriteLine("here is VM:" + _Weekly_Weather.Count);
+            foreach (var weather in this._Weather.Weekly_Weather)
+            {
+                this._Weekly_Weather.Add(new WeatherModel {
+                    WeatherCode = weather.WeatherCode,
+                    Datetime = weather.Datetime, 
+                    MinTemperature = weather.MinTemperature, 
+                    MaxTemperature = weather.MaxTemperature,
+                    Rainy_percent = weather.Rainy_percent,
+                });
+            }
 
-            //System.Diagnostics.Debug.WriteLine("this is VM:" + _Weekly_Weather.Count);
-            //this._Weekly_Weather.Add(new WeatherModel() { Temperature = 24.5, Condition = Condition.cloud, Date = "2/21", MaxTemperature = 26, MinTemperature = 20, Rainy_percent = 20, area = "huga" });
-            //this._Weekly_Weather.Add(new WeatherModel() { Temperature = 24.5, Condition = Condition.cloud, Date = "2/21", MaxTemperature = 26, MinTemperature = 20, Rainy_percent = 20, area = "huga" });
-            
-            //this._Weather.GetJsonData();
+            //foreach (var w in this._Weekly_Weather)
+            //{
+            //    System.Diagnostics.Debug.WriteLine(w.Image_URI.ToString());
+            //}
+        }
 
+        private void ClearWeeklyWeather()
+        {
+            this._Weekly_Weather.Clear();
         }
 
         public void Execute()

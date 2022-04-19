@@ -8,9 +8,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="cloud.png" />
+    <None Remove="images\rain.png" />
+    <None Remove="images\snow.png" />
+    <None Remove="images\sun.png" />
+    <None Remove="view\cloud.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="ReactiveProperty" Version="8.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="view\rain.png" />
+    <Resource Include="view\snow.png" />
+    <Resource Include="view\sun.png" />
+    <Resource Include="view\cloud.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="images\" />
   </ItemGroup>
 
 </Project>
