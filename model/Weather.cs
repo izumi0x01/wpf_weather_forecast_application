@@ -28,34 +28,22 @@ namespace wpf_weather_forecast_application.model
 
     internal class Weather
     {
+
         private WeatherModel one_day_weather;
 
         public WeatherModel One_day_weather { get; set; }
-        //{
-        //    get
-        //    {
-        //        return one_day_weather;
-        //    }
 
-        //}
+        private WeatherModel[] _Weekly_Weather;
 
-        //reactivecollectionとは違う？どっちも機能としては一緒．
-        private ObservableCollection<WeatherModel> _Weekly_Weather { get; set; } = new ObservableCollection<WeatherModel>();
+        public WeatherModel[] Weekly_Weather { get { return _Weekly_Weather; } }
 
-        public ObservableCollection<WeatherModel> Weekly_Weather { get { return _Weekly_Weather; } }
-
-        public void testfunc()
+        public Weather()
         {
-            System.Diagnostics.Debug.WriteLine("called");
-
-            this._Weekly_Weather.Add(new WeatherModel() { Temperature = 24.5, Condition = Condition.cloud, Date = "2/21", MaxTemperature = 26, MinTemperature = 20, Rainy_percent = 20, area = "huga" });
-            this._Weekly_Weather.Add(new WeatherModel() { Temperature = 24.5, Condition = Condition.cloud, Date = "2/21", MaxTemperature = 26, MinTemperature = 20, Rainy_percent = 20, area = "huga" });
-            this._Weekly_Weather.Add(new WeatherModel() { Temperature = 24.5, Condition = Condition.cloud, Date = "2/21", MaxTemperature = 26, MinTemperature = 20, Rainy_percent = 20, area = "huga" });
-            System.Diagnostics.Debug.WriteLine("this is M:" + _Weekly_Weather.Count);
-
+            _Weekly_Weather = new WeatherModel[8];
         }
 
-        public void GetJsonData()
+
+        public void GetWeeklyJsonData()
         {
 
             var url = "https://www.jma.go.jp/bosai/forecast/data/forecast/400000.json";
@@ -67,41 +55,56 @@ namespace wpf_weather_forecast_application.model
             StreamReader reader = new StreamReader(response_stream);
 
             var obj_from_json = JArray.Parse(reader.ReadToEnd());
-            System.Diagnostics.Debug.WriteLine(obj_from_json);
-
-            
-
-            //this.tempdata = json.ToString();
-            //Console.WriteLine(json.ToString());
-
             //one_day_weather.Date = https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json
 
-            //var obj_from_json = JObject.Parse(reader.ReadToEnd());
-            var forecast_datetime = obj_from_json[0]["timeSeries"][0]["areas"][0]["weathers"][0];
+            _Weekly_Weather = new WeatherModel[8];
 
-            System.Diagnostics.Debug.WriteLine(forecast_datetime);
+            for (int i = 0; i < 6; i++)
+            {
+                //_Weekly_Weather[i + 1].Datetime = (DateTime)obj_from_json[1]["timeSeries"][0]["timeDifines"][i];
+                //_Weekly_Weather[i + 1].Rainy_percent = (string)obj_from_json[1]["timeSeries"][0]["areas"][0]["pops"][i];
+                //_Weekly_Weather[i + 1].MinTemperature = (int)obj_from_json[1]["timeSeries"][1]["areas"][0]["tempsMin"][i];
+                //_Weekly_Weather[i + 1].MaxTemperature = (int)obj_from_json[1]["timeSeries"][1]["areas"][0]["tempsMax"][i];
+            };
 
-            //var forecast_area = obj_from_json["weather"]["targetArea"];
+            for (int i = 0; i < 2; i++)
+            {
+                _Weekly_Weather[i].Datetime = (DateTime)obj_from_json[0]["timeSeries"][0]["timeDefines"][i];
 
-            //this.one_day_weather.area = (string)forecast_area;
-            //this.one_day_weather.datetime = (string)forecast_datetime;
+            };
+
+
+            var rainy_perset = (string)obj_from_json[0]["timeSeries"][1]["areas"][0]["pops"][1];
+            for(int i = 2; i < 4; i++)
+            {
+                rainy_perset = rainy_perset + "/" + (string)obj_from_json[0]["timeSeries"][1]["areas"][0]["pops"][i];
+            }
+            _Weekly_Weather[1].Rainy_percent = rainy_perset;
+
+            _Weekly_Weather[1].MinTemperature = (int)obj_from_json[1]["timeSeries"][1]["areas"][0]["temps"][0];
+            _Weekly_Weather[1].MaxTemperature = (int)obj_from_json[1]["timeSeries"][1]["areas"][0]["temps"][1];
+
+            System.Diagnostics.Debug.WriteLine(_Weekly_Weather.ToString());
 
         }
 
-        public void Get_hukuoka_jsonData()
-        {
-            String url = "https://www.jma.go.jp/bosai/forecast/data/forecast/400000.json";
 
-            WebRequest request = WebRequest.Create(url);
-            WebResponse response = request.GetResponse();
-            Stream response_stream = response.GetResponseStream();
 
-            StreamReader reader = new StreamReader(response_stream);
-            JObject json = JObject.Parse(reader.ReadToEnd());
 
-            System.Diagnostics.Debug.WriteLine(json.ToString());
+        //public void Get_hukuoka_jsonData()
+        //{
+        //    String url = "https://www.jma.go.jp/bosai/forecast/data/forecast/400000.json";
 
-        }
+        //    WebRequest request = WebRequest.Create(url);
+        //    WebResponse response = request.GetResponse();
+        //    Stream response_stream = response.GetResponseStream();
+
+        //    StreamReader reader = new StreamReader(response_stream);
+        //    JObject json = JObject.Parse(reader.ReadToEnd());
+
+        //    System.Diagnostics.Debug.WriteLine(json.ToString());
+
+        //}
     }
 
     internal class WeatherModel
@@ -109,19 +112,15 @@ namespace wpf_weather_forecast_application.model
 
         //public string Location{ get; set; }
 
-        public double Temperature { get; set; }
-        public double Rainy_percent { get; set; }
+        public string Rainy_percent { get; set; } = "hoge";
 
         public Condition Condition { get; set; }
 
-        public string Date { get; set; }
+        public int MaxTemperature { get; set; } = 1;
 
-        public double MaxTemperature { get; set; }
+        public int MinTemperature { get; set; } = 1;
 
-        public double MinTemperature { get; set; }
-
-        public string datetime { get; set; }
-        public string area { get; set; }
+        public DateTime Datetime { get; set; }
 
     }
 }

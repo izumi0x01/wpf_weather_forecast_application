@@ -36,7 +36,6 @@ namespace wpf_weather_forecast_application.viewmodel
         //Collection の要素の入れ替えや編集など を記述する場合に適しています。 Collection の要素に対して処理を加えたい場合は
         //ObservableCollection<T> を利用するとよいでしょう。
 
-
         private ObservableCollection<WeatherModel> _Weekly_Weather { get; set; } = new ObservableCollection<WeatherModel>();
         /// <summary>
         /// 一週間の天気,読み取り専用
@@ -48,9 +47,9 @@ namespace wpf_weather_forecast_application.viewmodel
         public MainViewModel()
         {
             this._Weather = new Weather();
-
+            this._Weather.GetWeeklyJsonData();
         }
-        
+
         private DelegateCommand _GetDataCommand;
 
         public DelegateCommand GetDataCommand
@@ -68,13 +67,14 @@ namespace wpf_weather_forecast_application.viewmodel
 
         private void GetData()
         {
-            this._Weather.testfunc();
-            //this._Weekly_Weather = this._Weather.Weekly_Weather;
+            //this._Weekly_Weather = new ObservableCollection<WeatherModel>(this._Weather.Weekly_Weather);
+            System.Diagnostics.Debug.WriteLine("here is VM:" + _Weekly_Weather.Count);
 
             //System.Diagnostics.Debug.WriteLine("this is VM:" + _Weekly_Weather.Count);
             //this._Weekly_Weather.Add(new WeatherModel() { Temperature = 24.5, Condition = Condition.cloud, Date = "2/21", MaxTemperature = 26, MinTemperature = 20, Rainy_percent = 20, area = "huga" });
             //this._Weekly_Weather.Add(new WeatherModel() { Temperature = 24.5, Condition = Condition.cloud, Date = "2/21", MaxTemperature = 26, MinTemperature = 20, Rainy_percent = 20, area = "huga" });
-            this._Weather.GetJsonData();
+            
+            //this._Weather.GetJsonData();
 
         }
 
