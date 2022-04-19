@@ -37,12 +37,12 @@
                 </Rectangle.Fill>
             </Rectangle>-->
             <Button Command="{Binding GetDataCommand}" Content="getdata">
-                
+
             </Button>
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="0" Background="WhiteSmoke">
-            <ListBox HorizontalAlignment="Left" ItemsSource="{Binding One_day_Weather}" Width="Auto" MaxWidth="600"  Margin="50,50,400,50">
+            <ListBox HorizontalAlignment="Left" ItemsSource="{Binding Weekly_Weather}" Width="Auto" MaxWidth="600"  Margin="50,50,400,50">
 
                 <!--外枠のデザインの設定-->
                 <ListBox.Template>

@@ -3,6 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using Reactive.Bindings;
+using System.Reactive.Linq;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Newtonsoft.Json;
+
 
 namespace wpf_weather_forecast_application.model
 {
@@ -22,16 +28,6 @@ namespace wpf_weather_forecast_application.model
 
     internal class Weather
     {
-        private List<WeatherModel> one_week_weather = new List<WeatherModel>();
-
-        public List<WeatherModel> One_week_weather
-        {
-            get
-            {
-                return one_week_weather;
-            }
-        }
-
         private WeatherModel one_day_weather;
 
         public WeatherModel One_day_weather { get; set; }
@@ -43,36 +39,58 @@ namespace wpf_weather_forecast_application.model
 
         //}
 
-        public string tempdata { get; set; }
+        //reactivecollectionとは違う？どっちも機能としては一緒．
+        private ObservableCollection<WeatherModel> _Weekly_Weather { get; set; } = new ObservableCollection<WeatherModel>();
+
+        public ObservableCollection<WeatherModel> Weekly_Weather { get { return _Weekly_Weather; } }
+
+        public void testfunc()
+        {
+            System.Diagnostics.Debug.WriteLine("called");
+
+            this._Weekly_Weather.Add(new WeatherModel() { Temperature = 24.5, Condition = Condition.cloud, Date = "2/21", MaxTemperature = 26, MinTemperature = 20, Rainy_percent = 20, area = "huga" });
+            this._Weekly_Weather.Add(new WeatherModel() { Temperature = 24.5, Condition = Condition.cloud, Date = "2/21", MaxTemperature = 26, MinTemperature = 20, Rainy_percent = 20, area = "huga" });
+            this._Weekly_Weather.Add(new WeatherModel() { Temperature = 24.5, Condition = Condition.cloud, Date = "2/21", MaxTemperature = 26, MinTemperature = 20, Rainy_percent = 20, area = "huga" });
+            System.Diagnostics.Debug.WriteLine("this is M:" + _Weekly_Weather.Count);
+
+        }
 
         public void GetJsonData()
         {
-            String url = "https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json";
+
+            var url = "https://www.jma.go.jp/bosai/forecast/data/forecast/400000.json";
 
             WebRequest request = WebRequest.Create(url);
             WebResponse response = request.GetResponse();
             Stream response_stream = response.GetResponseStream();
 
             StreamReader reader = new StreamReader(response_stream);
-            JObject json = JObject.Parse(reader.ReadToEnd());
+
+            var obj_from_json = JArray.Parse(reader.ReadToEnd());
+            System.Diagnostics.Debug.WriteLine(obj_from_json);
+
+            
 
             //this.tempdata = json.ToString();
             //Console.WriteLine(json.ToString());
 
             //one_day_weather.Date = https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json
 
-            var obj_from_json = JObject.Parse(reader.ReadToEnd());
-            var forecast_datetime = obj_from_json["weather"]["reportDatetime"];
-            var forecast_area = obj_from_json["weather"]["targetArea"];
+            //var obj_from_json = JObject.Parse(reader.ReadToEnd());
+            var forecast_datetime = obj_from_json[0]["timeSeries"][0]["areas"][0]["weathers"][0];
 
-            this.one_day_weather.area = (string)forecast_area;
-            this.one_day_weather.datetime = (string)forecast_datetime;
+            System.Diagnostics.Debug.WriteLine(forecast_datetime);
+
+            //var forecast_area = obj_from_json["weather"]["targetArea"];
+
+            //this.one_day_weather.area = (string)forecast_area;
+            //this.one_day_weather.datetime = (string)forecast_datetime;
 
         }
 
         public void Get_hukuoka_jsonData()
         {
-            String url = "https://www.jma.go.jp/bosai/forecast/data/overview_forecast/400000.json";
+            String url = "https://www.jma.go.jp/bosai/forecast/data/forecast/400000.json";
 
             WebRequest request = WebRequest.Create(url);
             WebResponse response = request.GetResponse();
@@ -81,7 +99,8 @@ namespace wpf_weather_forecast_application.model
             StreamReader reader = new StreamReader(response_stream);
             JObject json = JObject.Parse(reader.ReadToEnd());
 
-            this.tempdata = json.ToString();
+            System.Diagnostics.Debug.WriteLine(json.ToString());
+
         }
     }
 
